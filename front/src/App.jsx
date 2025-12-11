@@ -51,12 +51,20 @@ function App() {
         }
     };
 
+    //削除機能
+    const del = async (id) => {
+        eventList.filter((e) => e.id !== id);
+        await fetch(`/api/events/${id}`, {
+            method: "DELETE",
+        });
+    }
+
 
     useEffect(() => {
         getFetchEvent();
         const interval = setInterval(() => {
             getFetchEvent();
-        }, 5000)
+        }, 1000)
         return () => clearInterval(interval);
     }, []);
 
@@ -74,14 +82,12 @@ function App() {
             <div>COUNTER</div>
             <div>📅</div>
             {/*//ここからはリストの表示*/}
-
-
-
             {eventList.map((post, index) => (
                 <div className="post" key={index}>
                     <p>タイトル：{post.eventTitle}</p>
                     <p>テキスト：{post.eventUrl}</p>
                     <p>イベント日：{post.eventDate}</p>
+                    <button onClick={()=> del(post.id)}>ゴミ箱</button>
                 </div>
             ))}
         </>

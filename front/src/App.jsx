@@ -74,6 +74,9 @@ function App() {
             <div>COUNTER</div>
             <div>📅</div>
             {/*//ここからはリストの表示*/}
+
+
+
             {eventList.map((post, index) => (
                 <div className="post" key={index}>
                     <p>タイトル：{post.eventTitle}</p>

@@ -34,6 +34,7 @@ function App() {
                 }),
             });
             resetForm();
+            await getFetchEvent()
         } catch (error) {
             console.error(error)
         }
@@ -55,16 +56,13 @@ function App() {
     const del = async (id) => {
         await fetch(`/api/events/${id}`, {
             method: "DELETE",
-        });
+        })
+        getFetchEvent();
     }
 
 
     useEffect(() => {
         getFetchEvent();
-        const interval = setInterval(() => {
-            getFetchEvent();
-        }, 1000)
-        return () => clearInterval(interval);
     }, []);
 
 
